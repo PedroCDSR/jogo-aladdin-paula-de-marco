@@ -6,7 +6,10 @@ referência nova ou uma arte for implementada.
 Situação: `provisório` (design ou qualidade ainda não final) · `em validação` · `validado` (prancha comparativa feita e
 diferenças anotadas) · `aguardando referência` (qualidade final, mas o design depende de foto do Pedro).
 
-Situação em 01/11/2026, depois da auditoria e da Etapa 8.0 (guia em `estilo/reference-notes.md`):
+Situação em 01/11/2026, depois da auditoria e da Etapa 8.0 (guia em `estilo/reference-notes.md`).
+Em `estilo/` entraram também os sheets de sprites do Aladdin do SNES baixados do Sprite Database
+(`estilo/sprites-spritedatabase/aladdin-snes/`, 13 arquivos; regras de uso no `reference-notes.md` da pasta):
+onde a coluna Referências diz `estilo/`, ela inclui essas capturas **e** os sheets:
 
 | Arte do jogo | Arquivo no jogo | Referências | Situação | Diferenças anotadas |
 |---|---|---|---|---|

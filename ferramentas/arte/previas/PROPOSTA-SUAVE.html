@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposta visual suave — aprovação</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin:0; padding:24px; background:#161321; color:#f5e9d6;
+         font-family: system-ui, sans-serif; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  p.sub { margin:0 0 20px; color:#b9a9c9; font-size:14px; }
+  figure { margin:0 0 28px; }
+  figcaption { font-size:13px; color:#b9a9c9; margin-top:6px; }
+  img { image-rendering: pixelated; max-width:100%; height:auto;
+        border:1px solid #3a3350; border-radius:6px; display:block; }
+  .lupa img { width: 960px; }
+  section { max-width: 1000px; }
+</style>
+</head>
+<body>
+<section>
+  <h1>🎨 Proposta de novo visual — "suave, estilo Aladdin SNES"</h1>
+  <p class="sub">Fase 1 (Itajubá) em 480×270, tamanho real do jogo. Nada no código do jogo foi alterado ainda.</p>
+
+  <figure>
+    <img src="cena-suave.png" alt="Cena nova 480x270">
+    <figcaption>1. Cena completa no tamanho exato do jogo (480×270).</figcaption>
+  </figure>
+
+  <figure class="lupa">
+    <img src="cena-suave-grande.png" alt="Cena ampliada 2x">
+    <figcaption>2. Mesma cena ampliada 2× para ver o detalhe dos tiles (areia sem grade de tijolos, bordas arredondadas, dither no céu).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="ref_x_novo.png" alt="Referência SNES x proposta">
+    <figcaption>3. Prancha comparativa: referência medida (AladdinTown.gif da Sprite Database) × nossa proposta.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="tiles-suave-zoom.png" alt="Tiles zoom 8x">
+    <figcaption>4. Os 4 tiles novos com zoom 8×: chaoTopo, chao, plataforma (viga), toldo (lona com franja).</figcaption>
+  </figure>
+
+  <p class="sub">Para reproduzir/regenerar: <code>python3 ferramentas/arte/previa_suave.py /workspace /workspace/ferramentas/arte/previas</code></p>
+</section>
+</body>
+</html>
