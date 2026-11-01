@@ -11,7 +11,7 @@ import { ArteJogador, PERSONAGENS } from '../art/index.js';
 const ANIM_JOGADOR = ['parado', 'correndo', 'pulando', 'caindo', 'arremessando', 'dano', 'sentado'];
 
 // Páginas: cada uma lista personagens; todas as animações de cada um entram na página.
-const PAGINAS = [['jogador', 'capivara'], ['jafar', 'paula', 'claudia'], ['jasmine', 'genio', 'abu', 'sultao', 'bailarina', 'tapete']];
+const PAGINAS = [['jogador', 'capivara'], ['jafar', 'paula', 'claudia'], ['jasmine', 'genio', 'abu', 'sultao', 'bailarina', 'tapeteMagico']];
 
 const ESCALA = 2;
 const COLUNAS = 6;
@@ -68,7 +68,7 @@ export class Galeria extends Phaser.Scene {
       // chão de referência (onde os pés tocam)
       this.itens.add(this.add.rectangle(x, yBase, larguraCel - 8, 1, CORES.roxo, 0.5));
       const spr = this.add.sprite(x, yBase, c.nome).setOrigin(0.5, 1).setScale(ESCALA);
-      if (c.nome === 'tapete') spr.setScale(1);
+      if (c.nome === 'tapeteMagico') spr.setScale(1);
       spr.play(c.anim);
       // animações que tocam uma vez: repetir para dar para ver
       if (spr.anims.currentAnim?.repeat === 0) {

@@ -745,7 +745,7 @@ PERSONAGENS = {
     'abu': (gerar_abu, 32, 48, 'Abu: macaquinho marrom com lenço verde no pescoço.'),
     'sultao': (sultao, 32, 48, 'Sultão: baixinho, barba branca, coroa dourada, capa rosa, túnica verde.'),
     'bailarina': (gerar_bailarina, 32, 48, 'Bailarina do Espaço (sem rosto de aluno): coque, collant lilás, tutu rosa. Chega correndo com a notícia.'),
-    'tapete': (gerar_tapete, TL, TA, 'Tapete mágico: estampa dos quadrados arredondados concêntricos do logo.'),
+    'tapeteMagico': (gerar_tapete, TL, TA, 'Tapete mágico: estampa dos quadrados arredondados concêntricos do logo.'),
 }
 
 

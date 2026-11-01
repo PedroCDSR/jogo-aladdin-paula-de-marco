@@ -27,10 +27,11 @@ Jogo de plataforma 2D curto, para celular, que funciona para explicar o que é o
 
 ## 3. Como trabalhar neste repositório
 
-- Uma etapa por vez. Antes de etapas grandes, apresente um plano curto e espere o OK.
+- Uma etapa por vez. Antes de etapas grandes, apresente um plano curto (até o lançamento, sem esperar OK: ver a regra abaixo).
 - Branch `main` = produção. Cada deploy de produção consome créditos do plano gratuito do Netlify, então ela só recebe merge no lançamento.
 - Branch `dev` = integração. Deploys de `dev` e de PRs são gratuitos.
 - Cada etapa: nova branch `etapa-N-nome` a partir de `dev` e PR contra `dev`. Nunca fazer merge em `main`; isso é decisão do Pedro.
+- **Regra até o lançamento (decisão do Pedro, 01/11/2026):** o Claude decide sozinho, testa ele mesmo no Chromium com Playwright (sem erros no console, capturas conferidas) e **faz o merge do PR no `dev`**. O Pedro só faz o teste final antes do lançamento. Não é preciso esperar OK de plano nem teste do Pedro entre as etapas. `main` continua intocável: o merge em `main` é só do Pedro.
 - Autor dos commits: `Pedro Rocha <65837046+PedroCDSR@users.noreply.github.com>` (`git config` sem `--global`). Decisão própria deste projeto (e-mail "noreply" do GitHub, para não expor o e-mail pessoal).
 - Ao terminar cada etapa:
   - `npm run build` sem erros;
@@ -61,6 +62,7 @@ Jogo de plataforma 2D curto, para celular, que funciona para explicar o que é o
 
 ```
 references/            referências visuais: figurinos/ pessoas/ lugares/ logo/ estilo/ (não vai para o build)
+ferramentas/           geradores de arte (arte/) e de mapas (mapas/), em Python; não vai para o build
 public/
   assets/sprites/      PNGs finais, quando existirem
   assets/audio/        música (MP3)
@@ -262,12 +264,19 @@ Cada etapa termina com PR contra `dev` e o checklist da seção 3.
 | 0 | 01/11/2026 | [PR 1](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/1) | Vite 8 + Phaser 4.2.1, estrutura de pastas, fontes woff2 (33 KB), cena de teste com acentos e dados do evento. |
 | 1 | 01/11/2026 | [PR 2](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/2) | Aviso de girar, controles de toque + teclado, pausa ao perder o foco (volta com toque), som liberado no 1º toque, botão de som, tela cheia + trava deitado no Android. Cena de teste com um bloco que anda, pula e joga maçã. |
 | 2 | 01/11/2026 | [PR 3](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/3) | Leitor de mapas em texto, Aladdin original provisório (13 quadros em matriz), tiles 16×16, física com pulo variável, coyote e buffer, câmera com zona morta e folga à frente, céu de entardecer e morros. Pulo alto 69 px, pulo curto 34 px. |
-| 8A | 01/11/2026 | [PR 9](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/9) | Personagens originais em matriz: capivara (andando, comendo, dormindo com zzz, tonta), Jafar (flutuando, lançando, vulnerável), Tia Claudia, Tia Paula (neutra, fácil de trocar), Jasmine, Gênio, Abu, Sultão, bailarina, tapete com a estampa do logo e Aladdin sentado. Vitrine em `?galeria`. |
+| 3 | 01/11/2026 | [PR 7](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/7) | Fase 1 com 320 colunas: rua, feira com 6 barracas de toldo, praça com fonte, checkpoint, buracos e plataformas, porta do Espaço. 12 capivaras (pisão = dorme; maçã = come e vai embora; de lado = 1 coração), 38 sapatilhas, 9 maçãs, 3 corações. HUD com corações, maçãs, sapatilhas, pausa e som. Casario de Itajubá no fundo (3 camadas). `dist/` com 1,5 MB. |
+| 6 | 01/11/2026 | [PR 8](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/8) | Fase 4 (Tapete): rolagem automática de 40 s + pouso de ~4 s no Teatro do Colégio G9, segurar sobe / soltar desce (toque em qualquer lugar, espaço, W ou seta para cima), pássaros (sabiás), pipas, postes e fios, sapatilhas no céu, batida = pisca e perde 2 sapatilhas. Tela Final provisória. Teste direto: `?fase=tapete`. Feita antes das Etapas 4 e 5 (modo autônomo). `dist/` = 1,51 MB (já com a Etapa 3). |
+| 8A | 01/11/2026 | [PR 9](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/9) | Personagens originais em matriz 32×48: capivara (andando, comendo a maçã, dormindo com zzz, tonta; já em uso na Fase 1), Jafar (flutuando, lançando, vulnerável), Tia Claudia, Tia Paula (neutra, fácil de trocar), Jasmine, Gênio, Abu, Sultão, bailarina, tapete mágico com a estampa do logo e Aladdin sentado. Vitrine em `?galeria`. `dist/` = 1,5 MB. |
 
-**Próximo passo (01/11/2026):** a Etapa 8A (personagens) foi feita antes das Etapas 3 a 7, a pedido do Pedro.
-O Pedro confere a vitrine (`?galeria` na prévia do `dev`) no celular. Depois, **Etapa 3, Fase 1 (Itajubá)**, já usando
-as animações prontas da capivara (`capivara-andando`, `capivara-comendo`, `capivara-dormindo`). Quando chegarem fotos
-dos figurinos e a descrição da Tia Paula, redesenhar no `ferramentas/arte/gerar_personagens.py`.
+**Próximo passo (01/11/2026):** a Etapa 8A (personagens, PR 9) foi feita em paralelo e já está no `dev`.
+Próxima: **Etapa 4, Fase 2 (Espaço Paula De Marco)**: sistema de diálogo, NPCs, Tia Claudia com os ingressos, contador de
+ingressos no HUD e a transição para o chefe. Os NPCs já têm arte e animação prontas (`claudia-falando`,
+`claudia-entregando`, `jasmine-parado`, `genio-parado`, `abu-parado`, `sultao-parado`, `bailarina-correndo` para quem
+chega com a notícia). A tela provisória `EmBreve` sai nessa etapa. Depois, Etapa 5 (Chefe), usando `jafar-flutuando`,
+`jafar-lancando`, `jafar-vulneravel` e `paula-presa`, e que deve terminar com `this.scene.start('Tapete')` (o HUD da
+Fase 1 deve ser parado antes: o Tapete tem contador próprio). Na Etapa 8B (cenários), trocar o sprite composto `voo` da
+Fase 4 pelas peças novas (`tapeteMagico` + `jogador` quadro `sentado` + `paula-sentada`). Para testar: `?fase=tapete`,
+`?galeria`. O Pedro só testa no fim, antes do lançamento.
 
 **Decisões técnicas da Etapa 1:**
 - O toque é escutado na **div inteira** (`input.touch.target`), não só no canvas: no celular deitado sobram faixas laterais, e é ali que ficam os polegares.
@@ -286,16 +295,43 @@ dos figurinos e a descrição da Tia Paula, redesenhar no `ferramentas/arte/gera
 - Tiles via `Tilemap` do Phaser; `=` e `T` só colidem por cima. O mundo não tem chão invisível: cair abaixo do mapa volta ao checkpoint (por enquanto, o `P`).
 - Objetos do mapa (C, a, s, h, K, F, E) aparecem como marcadores coloridos; ganham comportamento na Etapa 3.
 
+**Decisões técnicas da Etapa 3:**
+- Decisões do Pedro (01/11/2026): ele delegou as escolhas. Branch `etapa-3-itajuba`; encostar de lado numa capivara acordada tira 1 coração.
+- A seção 7.1 (gestão rígida de referências) foi removida a pedido do Pedro. Continua valendo a regra 3: as capturas do jogo original em `references/` servem só de clima, nunca de modelo de personagem, sprite ou cenário.
+- Mapa montado por trechos em `ferramentas/mapas/gerar_itajuba.py` (anota alcance do pulo e do toldo). O `src/levels/itajuba.js` gerado é editável à mão.
+- Arte dos objetos (capivara com 6 quadros, maçã, sapatilha, coração cheio/vazio, fonte com água animada, bandeira) em `ferramentas/arte/gerar_objetos.py` → `src/art/objetos.js`. Casario e torre da igreja são desenhados em canvas no `Preload`; barracas e fachada do Espaço, com `Graphics` na cena.
+- HUD é uma cena separada (`scenes/HUD.js`) que lê o `registry` (`vida`, `vidaMax`, `macas`, `sapatilhas`). O botão de pausa usa a mesma tela "Pausado" da Etapa 1 (`pausarAgora()` em `ui/PausaFoco.js`). O menu de pausa completo fica para a Etapa 7.
+- Toldo: quica 520 segurando PULAR (≈150 px) e 420 sem segurar (≈98 px). Pisar na capivara segurando PULAR também vai mais alto.
+- Maçã: arco baixo que quica até 3 vezes e rola, para acertar capivaras de perto e de longe (até ~140 px). O `overlap` do Arcade entre dois grupos não disparou para maçã × capivara; a checagem é feita à mão no `update()`.
+- Ao voltar ao checkpoint: vida cheia, 1 s de invencibilidade e no mínimo 3 maçãs. Capivaras dormindo continuam dormindo.
+- Coração só é recolhido se faltar vida; maçã só se houver espaço (máximo 9).
+- A tela "JOGAR" provisória continua até a Etapa 7. Ao chegar na porta, `scenes/EmBreve.js` mostra as sapatilhas e "JOGAR DE NOVO" (sai na Etapa 4).
+- Teste automatizado no Chromium (Playwright) conferiu: pisão, maçã, quique no toldo, checkpoint, buraco, 3 danos, coleta, chegada na porta e jogar de novo, sem erros no console.
+
+**Decisões técnicas da Etapa 6:**
+- O voo do tapete é feito à mão (sem Arcade Physics): aceleração para cima ao segurar, para baixo ao soltar, velocidade máxima nos dois sentidos e aceleração 1,8× ao inverter, para a resposta parecer imediata sem tranco. Sobe até 165 px/s, desce até 140 px/s (`TAPETE` em `config.js`).
+- A câmera anda sozinha (96 px/s); o tapete fica sempre no x 120 da tela. A duração sai do tamanho do mapa: 8 trechos de 30 colunas = 3840 px = 40 s.
+- Mapa do céu em `src/levels/tapete.js`, com legenda própria: `s` sapatilha, `B` pássaro, `Q` pipa, `f` topo de poste (dois `f` na mesma linha ganham um fio). Os trechos têm 30 colunas e são emendados.
+- No limite de baixo o tapete só desliza sobre os telhados, sem dano. Batida: 1,2 s piscando, perde até 2 sapatilhas (caem do tapete), o pássaro foge; postes, fios e pipas continuam no lugar.
+- Arte original em `ferramentas/arte/gerar_tapete.py` → `src/art/tapete.js`: tapete ondulando (3 quadros) com a estampa dos quadrados concêntricos do logo (rosa, amarelo, verde, roxo sobre lilás), Aladdin provisório sentado, **Tia Paula provisória** (coque castanho, vestido roxo; aparência A DEFINIR), sabiá-laranjeira, pipa nas cores da escola, sapatilha de ponta.
+- Fachada do teatro, cidade ao fundo (com uma torre de igreja genérica) e telhados são desenhados em código e **genéricos**: refazer quando chegarem as fotos do Teatro do Colégio G9.
+- O sol desce durante a fase (entardecer). Parallax: morros 0,15, cidade 0,35, telhados 1.
+- `?fase=tapete` ou `?fase=final` no link abre a fase direto (útil na prévia do Netlify). Sem o parâmetro abre a Fase 1 (Itajubá).
+- `scenes/Final.js` é **provisória**: cortinas, cartão do evento, QUERO INGRESSOS (WhatsApp) e JOGAR DE NOVO. A Etapa 7 faz a versão completa.
+- O contador de sapatilhas do tapete usa o `registry` (`sapatilhas`), o mesmo nome do HUD do PR 7.
+
 **Decisões técnicas da Etapa 8A (personagens):**
-- `references/figurinos/` tem só capturas do Aladdin de SNES e uma imagem de capivaras de outro autor (The 14Collective): **nenhuma foto de figurino**. Foram usadas só como clima (paleta quente, capivara de lado com corpo de barril). Todos os designs são originais e seguem as descrições da seção 8 e a paleta da escola. `pessoas/`, `logo/`, `lugares/` e `estilo/` estão vazias.
+- `references/figurinos/` tem só capturas do Aladdin de SNES e uma imagem de capivaras de outro autor (The 14Collective): **nenhuma foto de figurino**. Foram usadas só como clima (paleta quente, capivara de lado com corpo de barril). Todos os designs são originais e seguem a seção 8 e a paleta da escola. `pessoas/`, `logo/`, `lugares/` e `estilo/` estão vazias.
 - Para fugir do visual do filme e do jogo: Jafar com túnica roxa, colete vinho, turbante vinho com pena **verde**, flutuando em fumaça lilás (sem cajado de cobra); Gênio de pele morena, turbante rosa, colete dourado, barba curta (não é azul); Abu com lenço verde (sem colete roxo nem chapéu); Jasmine com trança, blusa lilás e calça rosa; Sultão com **coroa** dourada em vez de turbante.
-- Um arquivo por personagem em `src/art/<nome>.js` com `PALETA`, `QUADROS` e `ANIMACOES`. O `Preload` cria a textura `<nome>` e as animações `<nome>-<animação>` sozinho (registro em `PERSONAGENS`, `src/art/index.js`).
-- Todos olham para a direita; o jogo espelha com `setFlipX`. Quadros de 32×48 (pés na linha 46), tapete de 64×24.
-- Tia Paula: aparência neutra (coque castanho, vestido roxo da escola, lenço rosa). Trocar só o bloco `APARENCIA_PAULA` no gerador.
-- Personagem extra: **bailarina** do Espaço (genérica, sem rosto de aluno), com animação de correr: é ela quem chega avisando que o Jafar levou a Tia Paula. Também o **Sultão**, como "demais personagens".
-- Aladdin ganhou o quadro `sentado` (anim `sentado`), e a Tia Paula, `sentada`, para a fase do tapete.
-- Vitrine `src/scenes/Galeria.js` (abre com `?galeria`, ou `?galeria=2` para a página 2). Folha de sprites e capturas em `ferramentas/arte/previas/` (fora do build).
+- Gerador `ferramentas/arte/gerar_personagens.py` (peças comuns em `pixel.py`) → um arquivo por personagem em `src/art/<nome>.js` com `PALETA`, `QUADROS` e `ANIMACOES`. O `Preload` cria a textura `<nome>` e as animações `<nome>-<animação>` sozinho (registro em `PERSONAGENS`, `src/art/index.js`).
+- Todos olham para a direita; o jogo espelha com `setFlipX`. Quadros de 32×48 (pés na linha 46); `tapeteMagico` tem 64×24 (o nome evita conflito com `src/art/tapete.js` da Fase 4).
+- A capivara da Fase 1 passou a usar a arte nova (32×48): animações `capivara-andando`, `capivara-comendo`, `capivara-dormindo`. A caixa de colisão foi só deslocada (`CAPIVARA.corpo.y` = 31) e continua 24×16. O "zzz" agora vem desenhado no sprite (o texto flutuante de "zzz" saiu; o "nham!" continua). A capivara antiga saiu do `gerar_objetos.py`.
+- Tia Paula: aparência neutra (coque castanho, vestido roxo da escola, lenço rosa), coerente com a Paula provisória da Fase 4. Trocar só o bloco `APARENCIA_PAULA` no gerador.
+- Personagens extras: **bailarina** do Espaço (genérica, sem rosto de aluno), com animação de correr, para chegar com a notícia do Jafar; e o **Sultão**, como "demais personagens".
+- Aladdin ganhou o quadro `sentado` (anim `sentado`), e a Tia Paula, `sentada`.
+- Vitrine `src/scenes/Galeria.js` (`?galeria`, ou `?galeria=2` para a página 2). Folha de sprites e capturas em `ferramentas/arte/previas/` (fora do build).
 
 **Riscos anotados:**
+- A Fase 1 tem ~4.900 px: correndo direto dá ~35 s; com capivaras, toldos e coleta, a estimativa é de 60 a 80 s. Medir no celular e ajustar no polimento (Etapa 10).
 - Texto com Patrick Hand num canvas de 480×270 ampliado pode ficar serrilhado. Avaliar no celular na Etapa 4; se ficar ruim, desenhar o texto de diálogo numa resolução maior (por exemplo, câmera com zoom 2 num jogo de 960×540).
 - O Phaser completo pesa ~1,2 MB minificado (~330 KB comprimido na transferência). Cabe no orçamento; se apertar, trocar pelo build só com Arcade Physics.

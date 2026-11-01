@@ -14,9 +14,42 @@ export const TEXTOS = {
   },
   teste: {
     titulo: 'ALADDIN',
-    subtitulo: 'Etapa 2 · jogador e mapa',
     tocarJogar: 'Toque em JOGAR para começar',
     dicaTeclado: 'Setas ou A/D: andar · Espaço ou W: pular · X ou J: maçã · Esc: pausa',
+  },
+  itajuba: {
+    nomeFase: 'Fase 1 · Itajubá',
+    objetivo: 'Chegue ao Espaço Paula De Marco!',
+    placaEspaco: 'ESPAÇO PAULA DE MARCO',
+    zzz: 'zzz',
+    nham: 'nham!',
+    checkpoint: 'Ponto salvo!',
+    semMaca: 'Sem maçãs!',
+  },
+  // Tela provisória até a Fase 2 existir (Etapa 4)
+  emBreve: {
+    titulo: 'Você chegou ao Espaço!',
+    sapatilhas: (n) => `Sapatilhas: ${n}`,
+    proxima: 'A Fase 2 chega na próxima etapa.',
+    jogarDeNovo: 'JOGAR DE NOVO',
+  },
+  tapete: {
+    titulo: 'VOANDO PARA O TEATRO!',
+    dicaToque: 'Segure a tela para subir. Solte para descer.',
+    dicaTeclado: 'Segure espaço, W ou seta para cima para subir. Solte para descer.',
+    comecarToque: 'Toque para voar',
+    comecarTeclado: 'Aperte espaço para voar',
+    perdeu: '-{n}',
+    teatro: 'TEATRO',
+    teatroNome: 'Colégio G9',
+    chegou: 'Chegamos ao Teatro do Colégio G9!',
+  },
+  final: {
+    titulo: 'O ESPETÁCULO VAI COMEÇAR!',
+    sapatilhas: 'Você pegou {n} sapatilhas!',
+    provisorio: '(tela final provisória: a de verdade vem na Etapa 7)',
+    ingressos: 'QUERO INGRESSOS',
+    jogarDeNovo: 'JOGAR DE NOVO',
   },
   // Vitrine de personagens (abrir com ?galeria no endereço). Só para conferir a arte.
   galeria: {
@@ -33,7 +66,7 @@ export const TEXTOS = {
       abu: 'Abu',
       sultao: 'Sultão',
       bailarina: 'Bailarina',
-      tapete: 'Tapete',
+      tapeteMagico: 'Tapete',
     },
   },
 };
