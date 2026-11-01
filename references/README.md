@@ -30,5 +30,8 @@ Capturas de jogos vão em `estilo/`, não em `figurinos/`.
   ou fotos sem o rosto. O jogo não retrata alunos (CLAUDE.md, seção 8).
 - **Tia Paula e Tia Claudia:** só suba fotos com o OK delas.
 - **Direito autoral:** capturas de tela para estudo podem ficar em `estilo/`. Nunca suba sprites, tiles ou arquivos
-  **extraídos** do jogo original nem arquivos do filme. Nada de `references/` vai para `public/` sem licença e
-  registro em `CREDITS.md`. ROMs (`.sfc`, `.smc`, `.zip`) são bloqueadas pelo `.gitignore`.
+  **extraídos** do jogo original nem arquivos do filme. Única exceção registrada: os sheets de sprites e fundos do
+  Aladdin do SNES baixados do Sprite Database, que ficam isolados em `estilo/sprites-spritedatabase/aladdin-snes/`
+  (só como referência de estudo — nunca viram pixels do jogo; ver o `reference-notes.md` daquela pasta).
+  Nada de `references/` vai para `public/` sem licença e registro em `CREDITS.md`. ROMs (`.sfc`, `.smc`, `.zip`)
+  são bloqueadas pelo `.gitignore`.

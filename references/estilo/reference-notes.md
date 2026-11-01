@@ -17,6 +17,11 @@ medir; como são JPEG, as cores abaixo são aproximadas (agrupadas por mediana) 
 | `snes-tapete.jpg` | 516×387 | Voo noturno: lua, estrelas, nuvens, pássaros | Céu escuro quase liso, brilho da lua, nuvens em faixas |
 | `snes-corda.jpg` | 250×207 | Descida por corda, cidade e palácio ao fundo | Profundidade: fundo dessaturado e puxado para a cor do céu |
 
+Além das capturas, há **sheets de sprites e fundos** baixados do Sprite Database (13 arquivos GIF/PNG):
+`sprites-spritedatabase/aladdin-snes/` — inventário, regras de uso e o que medir estão em
+`sprites-spritedatabase/aladdin-snes/reference-notes.md`. Servem para medir escala real, número de quadros por
+animação e paleta. Continuam sendo referência de qualidade, nunca de design (regra 3).
+
 ## Medidas do herói (nas capturas → alvo no nosso jogo)
 
 | Item | Medido nas capturas | Alvo no jogo (480×270) | Atingido na 8.0 |
