@@ -262,10 +262,12 @@ Cada etapa termina com PR contra `dev` e o checklist da seção 3.
 | 0 | 01/11/2026 | [PR 1](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/1) | Vite 8 + Phaser 4.2.1, estrutura de pastas, fontes woff2 (33 KB), cena de teste com acentos e dados do evento. |
 | 1 | 01/11/2026 | [PR 2](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/2) | Aviso de girar, controles de toque + teclado, pausa ao perder o foco (volta com toque), som liberado no 1º toque, botão de som, tela cheia + trava deitado no Android. Cena de teste com um bloco que anda, pula e joga maçã. |
 | 2 | 01/11/2026 | [PR 3](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/3) | Leitor de mapas em texto, Aladdin original provisório (13 quadros em matriz), tiles 16×16, física com pulo variável, coyote e buffer, câmera com zona morta e folga à frente, céu de entardecer e morros. Pulo alto 69 px, pulo curto 34 px. |
+| 8A | 01/11/2026 | PR_8A | Personagens originais em matriz: capivara (andando, comendo, dormindo com zzz, tonta), Jafar (flutuando, lançando, vulnerável), Tia Claudia, Tia Paula (neutra, fácil de trocar), Jasmine, Gênio, Abu, Sultão, bailarina, tapete com a estampa do logo e Aladdin sentado. Vitrine em `?galeria`. |
 
-**Próximo passo (01/11/2026):** o Pedro testa a prévia do PR 3 no celular (sensação de correr e pular) e faz o merge no
-`dev`. Depois, **Etapa 3, Fase 1 (Itajubá)**: capivaras, maçãs com arremesso de verdade, toldos que quicam, fonte,
-sapatilhas, corações, checkpoint, HUD e transição. Apresentar o plano curto e esperar o OK antes de começar.
+**Próximo passo (01/11/2026):** a Etapa 8A (personagens) foi feita antes das Etapas 3 a 7, a pedido do Pedro.
+O Pedro confere a vitrine (`?galeria` na prévia do `dev`) no celular. Depois, **Etapa 3, Fase 1 (Itajubá)**, já usando
+as animações prontas da capivara (`capivara-andando`, `capivara-comendo`, `capivara-dormindo`). Quando chegarem fotos
+dos figurinos e a descrição da Tia Paula, redesenhar no `ferramentas/arte/gerar_personagens.py`.
 
 **Decisões técnicas da Etapa 1:**
 - O toque é escutado na **div inteira** (`input.touch.target`), não só no canvas: no celular deitado sobram faixas laterais, e é ali que ficam os polegares.
@@ -283,6 +285,16 @@ sapatilhas, corações, checkpoint, HUD e transição. Apresentar o plano curto 
 - PNG final: colocar em `public/assets/sprites/` e registrar em `SPRITES_PNG` (`src/art/index.js`). A lista evita pedidos 404.
 - Tiles via `Tilemap` do Phaser; `=` e `T` só colidem por cima. O mundo não tem chão invisível: cair abaixo do mapa volta ao checkpoint (por enquanto, o `P`).
 - Objetos do mapa (C, a, s, h, K, F, E) aparecem como marcadores coloridos; ganham comportamento na Etapa 3.
+
+**Decisões técnicas da Etapa 8A (personagens):**
+- `references/figurinos/` tem só capturas do Aladdin de SNES e uma imagem de capivaras de outro autor (The 14Collective): **nenhuma foto de figurino**. Foram usadas só como clima (paleta quente, capivara de lado com corpo de barril). Todos os designs são originais e seguem as descrições da seção 8 e a paleta da escola. `pessoas/`, `logo/`, `lugares/` e `estilo/` estão vazias.
+- Para fugir do visual do filme e do jogo: Jafar com túnica roxa, colete vinho, turbante vinho com pena **verde**, flutuando em fumaça lilás (sem cajado de cobra); Gênio de pele morena, turbante rosa, colete dourado, barba curta (não é azul); Abu com lenço verde (sem colete roxo nem chapéu); Jasmine com trança, blusa lilás e calça rosa; Sultão com **coroa** dourada em vez de turbante.
+- Um arquivo por personagem em `src/art/<nome>.js` com `PALETA`, `QUADROS` e `ANIMACOES`. O `Preload` cria a textura `<nome>` e as animações `<nome>-<animação>` sozinho (registro em `PERSONAGENS`, `src/art/index.js`).
+- Todos olham para a direita; o jogo espelha com `setFlipX`. Quadros de 32×48 (pés na linha 46), tapete de 64×24.
+- Tia Paula: aparência neutra (coque castanho, vestido roxo da escola, lenço rosa). Trocar só o bloco `APARENCIA_PAULA` no gerador.
+- Personagem extra: **bailarina** do Espaço (genérica, sem rosto de aluno), com animação de correr: é ela quem chega avisando que o Jafar levou a Tia Paula. Também o **Sultão**, como "demais personagens".
+- Aladdin ganhou o quadro `sentado` (anim `sentado`), e a Tia Paula, `sentada`, para a fase do tapete.
+- Vitrine `src/scenes/Galeria.js` (abre com `?galeria`, ou `?galeria=2` para a página 2). Folha de sprites e capturas em `ferramentas/arte/previas/` (fora do build).
 
 **Riscos anotados:**
 - Texto com Patrick Hand num canvas de 480×270 ampliado pode ficar serrilhado. Avaliar no celular na Etapa 4; se ficar ruim, desenhar o texto de diálogo numa resolução maior (por exemplo, câmera com zoom 2 num jogo de 960×540).

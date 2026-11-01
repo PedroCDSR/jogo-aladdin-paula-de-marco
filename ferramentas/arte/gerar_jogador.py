@@ -229,7 +229,14 @@ QUADROS['dano'] = pose(
     olho='dano',
 )
 
-ORDEM = ['parado1', 'parado2'] + [f'correndo{i}' for i in range(1, 7)] + ['pulando', 'caindo', 'arremessando1', 'arremessando2', 'dano']
+# sentado (no tapete): tronco mais baixo, pernas dobradas para a frente
+QUADROS['sentado'] = pose(
+    (((22, 40), (27, 42)), ((23, 39), (29, 41))),
+    (((12, 31), (13, 35)), ((21, 31), (24, 35))),
+    dy=6,
+)
+
+ORDEM = ['parado1', 'parado2'] + [f'correndo{i}' for i in range(1, 7)] + ['pulando', 'caindo', 'arremessando1', 'arremessando2', 'dano', 'sentado']
 
 
 def escrever_js(caminho):

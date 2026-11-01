@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
 import { LARGURA, ALTURA, TILE } from '../config.js';
-import { SPRITES_PNG, ArteJogador, ArteTiles } from '../art/index.js';
+import { SPRITES_PNG, ArteJogador, ArteTiles, PERSONAGENS } from '../art/index.js';
 import { texturaDeQuadros } from '../art/matriz.js';
 
 // Prepara texturas e animações antes do jogo começar.
@@ -24,9 +24,24 @@ export class Preload extends Phaser.Scene {
     const T = ArteTiles;
     texturaDeQuadros(this, 'tiles', T.ORDEM.map((n) => T.TILES[n] || null), T.PALETA, TILE, TILE);
 
+    // Personagens: textura '<nome>' e animações '<nome>-<animação>', tudo descrito no próprio arquivo da arte
+    for (const [nome, P] of Object.entries(PERSONAGENS)) {
+      texturaDeQuadros(this, nome, P.ORDEM.map((n) => P.QUADROS[n]), P.PALETA, P.LARGURA, P.ALTURA);
+      for (const [anim, a] of Object.entries(P.ANIMACOES)) {
+        this.anims.create({
+          key: `${nome}-${anim}`,
+          frames: a.quadros.map((q) => ({ key: nome, frame: P.ORDEM.indexOf(q) })),
+          frameRate: a.fps,
+          repeat: a.repetir,
+        });
+      }
+    }
+
     this.criarAnimacoes();
     this.criarCeu();
-    this.scene.start('Teste');
+    // ?galeria no endereço abre a vitrine de personagens (para conferir a arte no celular e no computador)
+    const galeria = new URLSearchParams(window.location.search).has('galeria');
+    this.scene.start(galeria ? 'Galeria' : 'Teste');
   }
 
   criarAnimacoes() {
@@ -39,6 +54,7 @@ export class Preload extends Phaser.Scene {
     anim('caindo', quadros('caindo'), 1);
     anim('arremessando', quadros('arremessando1', 'arremessando2'), 14, 0);
     anim('dano', quadros('dano'), 1);
+    anim('sentado', quadros('sentado'), 1);
   }
 
   // Céu de fim de tarde e morros ao fundo (versão simples; o parallax completo vem na Etapa 8).

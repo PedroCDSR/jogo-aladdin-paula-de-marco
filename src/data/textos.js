@@ -18,4 +18,22 @@ export const TEXTOS = {
     tocarJogar: 'Toque em JOGAR para começar',
     dicaTeclado: 'Setas ou A/D: andar · Espaço ou W: pular · X ou J: maçã · Esc: pausa',
   },
+  // Vitrine de personagens (abrir com ?galeria no endereço). Só para conferir a arte.
+  galeria: {
+    titulo: 'PERSONAGENS',
+    dica: 'Toque ou use as setas para trocar de página',
+    nomes: {
+      jogador: 'Aladdin',
+      capivara: 'Capivara',
+      jafar: 'Jafar',
+      claudia: 'Tia Claudia',
+      paula: 'Tia Paula',
+      jasmine: 'Jasmine',
+      genio: 'Gênio',
+      abu: 'Abu',
+      sultao: 'Sultão',
+      bailarina: 'Bailarina',
+      tapete: 'Tapete',
+    },
+  },
 };
