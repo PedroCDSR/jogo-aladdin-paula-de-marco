@@ -8,6 +8,8 @@ import { bipe } from '../audio/som.js';
 import { lerMapa, TIPO_TILE } from '../levels/leitor.js';
 import { TESTE } from '../levels/teste.js';
 import { Jogador } from '../objects/Jogador.js';
+import { montarItajuba } from '../cenarios/itajuba.js';
+import { criarPainel, criarBotao, criarTitulo, TEXTO_PAINEL } from '../ui/estilo.js';
 
 // Cena de teste da Etapa 2: mapa em texto, jogador com a física final, câmera e céu de fim de tarde.
 // Objetos (maçã, capivara, toldo que quica...) aparecem como marcadores e ganham vida na Etapa 3.
@@ -21,9 +23,8 @@ export class Teste extends Phaser.Scene {
     const mapa = lerMapa(TESTE, 'TESTE');
     this.mapa = mapa;
 
-    // fundo: céu parado + morros que andam devagar (parallax simples)
-    this.add.image(0, 0, 'ceu').setOrigin(0).setScrollFactor(0);
-    this.morros = this.add.tileSprite(0, 0, LARGURA, ALTURA, 'morros').setOrigin(0).setScrollFactor(0);
+    // cenário de Itajubá: céu, 3 camadas de parallax, casas, árvores, barracas, fonte e fachada do Espaço
+    this.cenario = montarItajuba(this, TESTE, mapa);
 
     // tiles
     const tm = this.make.tilemap({ data: mapa.tiles, tileWidth: TILE, tileHeight: TILE });
@@ -70,41 +71,30 @@ export class Teste extends Phaser.Scene {
 
   // Marcadores provisórios dos objetos do mapa (Etapa 3 troca por objetos de verdade).
   criarMarcadores(objetos) {
-    const cor = { maca: 0xe0453a, sapatilha: CORES.rosa, coracao: 0xff5a7a, capivara: 0x8a5a3a, checkpoint: CORES.verde, fonte: 0x9fb6c9, saida: CORES.amarelo };
-    const tam = { capivara: [26, 16], fonte: [44, 24], saida: [18, 30], checkpoint: [6, 28] };
+    const cor = { maca: 0xe0453a, sapatilha: CORES.rosa, coracao: 0xff5a7a, capivara: 0x8a5a3a, checkpoint: CORES.verde };
+    const tam = { capivara: [26, 16], checkpoint: [6, 28] };
     for (const o of objetos) {
+      if (o.tipo === 'fonte' || o.tipo === 'saida') continue; // já desenhadas pelo cenário
       const [w, h] = tam[o.tipo] || [8, 8];
       const y = tam[o.tipo] ? o.y - h / 2 : o.y - TILE / 2;
-      const x = o.tipo === 'fonte' ? o.x + TILE : o.x;
-      this.add.rectangle(x, y, w, h, cor[o.tipo]).setStrokeStyle(1, 0x2e1a33);
+      this.add.rectangle(o.x, y, w, h, cor[o.tipo]).setStrokeStyle(1, 0x2e1a33);
     }
   }
 
   criarTelaJogar() {
     const t = TEXTOS.teste;
     const tela = this.add.container(0, 0).setDepth(2000).setScrollFactor(0);
-    tela.add(this.add.rectangle(0, 0, LARGURA, ALTURA, CORES.lilas, 0.92).setOrigin(0));
-    tela.add(
-      this.add
-        .text(LARGURA / 2, 70, t.titulo, { fontFamily: FONTES.titulo, fontSize: '24px', color: CORES_CSS.branco })
-        .setOrigin(0.5)
-        .setShadow(2, 2, CORES_CSS.roxo, 0, false, true),
-    );
-    const botao = this.add.rectangle(LARGURA / 2, 150, 140, 40, CORES.rosa).setStrokeStyle(3, CORES.roxo);
+    // véu lilás por cima do cenário, painel no meio com o título e o botão JOGAR
+    tela.add(this.add.rectangle(0, 0, LARGURA, ALTURA, CORES.lilas, 0.45).setOrigin(0));
+    tela.add(criarPainel(this, LARGURA / 2, 128, 272, 156));
+    tela.add(criarTitulo(this, LARGURA / 2, 86, t.titulo, 24));
+    const botao = criarBotao(this, LARGURA / 2, 140, TEXTOS.botoes.jogar, { largura: 132, altura: 34, tamanho: 16, aoTocar: () => this.comecar(tela) });
     tela.add(botao);
     tela.add(
       this.add
-        .text(LARGURA / 2, 151, TEXTOS.botoes.jogar, { fontFamily: FONTES.titulo, fontSize: '16px', color: CORES_CSS.roxo })
+        .text(LARGURA / 2, 180, t.tocarJogar, { fontFamily: FONTES.dialogo, fontSize: '16px', color: TEXTO_PAINEL })
         .setOrigin(0.5),
     );
-    tela.add(
-      this.add
-        .text(LARGURA / 2, 200, t.tocarJogar, { fontFamily: FONTES.dialogo, fontSize: '16px', color: CORES_CSS.roxo })
-        .setOrigin(0.5),
-    );
-    botao.setInteractive({ useHandCursor: true });
-    // pointerup: o navegador só aceita tela cheia quando o dedo sai da tela
-    botao.on('pointerup', () => this.comecar(tela));
     this.input.keyboard?.once('keydown-ENTER', () => this.comecar(tela));
   }
 
@@ -122,7 +112,7 @@ export class Teste extends Phaser.Scene {
     // câmera olha um pouco para a frente do jogador
     const cam = this.cameras.main;
     cam.setFollowOffset(this.jogador.olhandoDireita ? -CAMERA.folgaFrente : CAMERA.folgaFrente, 0);
-    this.morros.tilePositionX = cam.scrollX * 0.2;
+    this.cenario.atualizar(cam);
 
     if (!this.jogando) {
       this.jogador.body.setVelocityX(0);
