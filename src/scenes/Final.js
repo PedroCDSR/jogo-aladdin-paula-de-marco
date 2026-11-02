@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { registrar } from '../metricas.js';
 import { LARGURA, ALTURA, CORES, CORES_CSS, FONTES } from '../config.js';
 import { TEXTOS, comNumero } from '../data/textos.js';
 import { TEM_LOGO } from '../art/index.js';
@@ -142,6 +143,7 @@ export class Final extends Phaser.Scene {
   }
 
   jogarDeNovo() {
+    registrar('jogar-de-novo');
     // quem joga de novo já viu a intro: vai direto para a primeira fase
     novaPartida(this); // (a Itajubá também zera vida, maçãs e sapatilhas ao começar)
     this.cameras.main.fadeOut(250, 158, 158, 255);

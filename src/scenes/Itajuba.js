@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { registrar } from '../metricas.js';
 import { LARGURA, ALTURA, TILE, CORES, CORES_CSS, FONTES, CAMERA, JOGADOR as J, MACA } from '../config.js';
 import { Tutorial } from '../ui/Tutorial.js';
 import { TEXTOS } from '../data/textos.js';
@@ -437,6 +438,7 @@ export class Itajuba extends Phaser.Scene {
   chegouNaPorta() {
     if (this.terminou) return;
     this.terminou = true;
+    registrar('fase1-itajuba');
     const j = this.jogador;
     j.body.setVelocity(0, 0);
     j.play('parado');

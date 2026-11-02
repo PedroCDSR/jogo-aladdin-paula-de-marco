@@ -167,6 +167,13 @@ export const TAPETE = {
   esperaFinalMs: 2200,
 };
 
+// Métricas anônimas (src/metricas.js). goatcounter = nome da conta (o "xxx" de xxx.goatcounter.com).
+// Vazio = desligado. Só conta no endereço de produção.
+export const METRICAS = {
+  goatcounter: '',
+  siteProducao: 'aladdin-paulademarco.netlify.app',
+};
+
 // Controles de toque, em pixels do jogo (480x270). Num celular deitado 1 px do jogo vale ~1,4 px da tela,
 // então raio 24 dá um botão de ~68 px reais (mínimo pedido: 64 px).
 // As áreas de toque são maiores que o desenho: cada metade de baixo da tela é dividida entre os botões dela.
