@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { registrar } from '../metricas.js';
 import { LARGURA, ALTURA, TILE, CORES, CORES_CSS, FONTES, CAMERA, JOGADOR as J, ESPACO } from '../config.js';
 import { TEXTOS } from '../data/textos.js';
 import { Entrada } from '../ui/Entrada.js';
@@ -300,6 +301,7 @@ export class Espaco extends Phaser.Scene {
 
   irParaOChefe() {
     this.terminou = true;
+    registrar('fase2-espaco');
     pararMusica(0.6);
     tocarEfeito('dano');
     const cam = this.cameras.main;

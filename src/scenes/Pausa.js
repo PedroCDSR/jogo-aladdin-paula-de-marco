@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { registrar } from '../metricas.js';
 import { LARGURA, ALTURA, CORES, CORES_CSS, FONTES } from '../config.js';
 import { TEXTOS } from '../data/textos.js';
 import { Botao } from '../ui/Botao.js';
@@ -95,6 +96,7 @@ export class Pausa extends Phaser.Scene {
   }
 
   pularFinal() {
+    registrar('pular-para-final');
     [this.cena, ...this.sobrepostas].forEach((k) => this.scene.stop(k));
     this.scene.start(FINAL); // start() também fecha esta cena
   }

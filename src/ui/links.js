@@ -1,6 +1,7 @@
 // Ações dos botões do cartão do evento: WhatsApp, Instagram e Compartilhar.
 // Tudo roda dentro do toque (pointerup do Botao), senão o navegador bloqueia a janela nova.
 import { EVENTO, linkWhatsapp, URL_JOGO } from '../data/evento.js';
+import { registrar } from '../metricas.js';
 
 function abrir(url) {
   // Sem 'noopener' nas opções: com ele o window.open devolve sempre null e não dá para saber se abriu.
@@ -11,10 +12,12 @@ function abrir(url) {
 }
 
 export function abrirIngressos() {
+  registrar('botao-ingressos');
   abrir(linkWhatsapp());
 }
 
 export function abrirInstagram() {
+  registrar('botao-instagram');
   abrir(EVENTO.instagram);
 }
 
@@ -27,6 +30,7 @@ export function linkDoJogo() {
 // Compartilhar: usa o menu do celular (navigator.share). Sem suporte, copia texto + link.
 // Devolve 'compartilhou' | 'cancelou' | 'copiou' | 'falhou'.
 export async function compartilhar(texto) {
+  registrar('botao-compartilhar');
   const url = linkDoJogo();
   if (navigator.share) {
     try {

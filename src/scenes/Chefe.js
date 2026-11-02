@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { registrar } from '../metricas.js';
 import { LARGURA, ALTURA, TILE, CORES, CORES_CSS, FONTES, JOGADOR as J, MACA, CHEFE as C } from '../config.js';
 import { TEXTOS } from '../data/textos.js';
 import { Entrada } from '../ui/Entrada.js';
@@ -382,6 +383,7 @@ export class Chefe extends Phaser.Scene {
     this.time.delayedCall(2500, async () => {
       j.setFlipX(this.paula.x < j.x);
       await this.dialogo.mostrar(t.paulaObrigada.map((texto) => ({ nome: t.nomePaula, texto, cor: COR_NOME.paula })));
+      registrar('fase3-chefe');
       const cam = this.cameras.main;
       cam.fadeOut(700, 158, 158, 255);
       cam.once('camerafadeoutcomplete', () => {

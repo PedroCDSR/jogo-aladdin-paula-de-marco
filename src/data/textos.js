@@ -74,6 +74,7 @@ export const TEXTOS = {
     voltar: 'VOLTAR',
     linkCopiado: 'Link copiado!',
     naoCopiou: 'Não deu certo',
+    privacidade: 'Este jogo conta acessos de forma anônima, sem cookies e sem dados pessoais.',
   },
 
   // Tela final
