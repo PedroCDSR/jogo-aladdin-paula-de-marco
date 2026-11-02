@@ -24,15 +24,15 @@ function enviar(caminho, titulo, evento) {
 
 // Uma visita por abertura do site.
 export function registrarVisita() {
-  enviar(location.pathname || '/', document.title, false);
+  enviar(`/${METRICAS.prefixo}${location.pathname || '/'}`, document.title, false);
 }
 
 // Evento do funil (nomes em EVENTOS, abaixo). Cada vez que acontece conta 1.
 export function registrar(nome) {
-  enviar(nome, nome, true);
+  enviar(`${METRICAS.prefixo}/${nome}`, nome, true);
 }
 
-// Nomes dos eventos, num lugar só (aparecem assim no painel do GoatCounter):
+// Nomes dos eventos, num lugar só (no painel aparecem com o prefixo: aladdin/jogar-facil, aladdin/final...):
 //   jogar-facil, jogar-medio, jogar-dificil   tocou em JOGAR e escolheu o nível
 //   fase1-itajuba, fase2-espaco, fase3-chefe   terminou a fase
 //   final                                      chegou à tela final (pelo jogo)

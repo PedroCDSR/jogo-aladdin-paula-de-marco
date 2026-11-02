@@ -167,10 +167,12 @@ export const TAPETE = {
   esperaFinalMs: 2200,
 };
 
-// Métricas anônimas (src/metricas.js). goatcounter = nome da conta (o "xxx" de xxx.goatcounter.com).
-// Vazio = desligado. Só conta no endereço de produção.
+// Métricas anônimas (src/metricas.js). goatcounter = código do site (o "xxx" de xxx.goatcounter.com).
+// Vazio = desligado. Só conta no endereço de produção. A conta "phr" do Pedro serve para vários projetos: tudo deste
+// jogo vai com o prefixo abaixo (visita em /aladdin/, eventos em aladdin/...), para separar no painel.
 export const METRICAS = {
-  goatcounter: '',
+  goatcounter: 'phr',
+  prefixo: 'aladdin',
   siteProducao: 'aladdin-paulademarco.netlify.app',
 };
 
