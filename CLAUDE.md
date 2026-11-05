@@ -40,7 +40,7 @@ Jogo de plataforma 2D curto, para celular, que funciona para explicar o que é o
    - A restrição de direito autoral **nunca** justifica arte genérica, simplificada ou abaixo do padrão medido nas
      referências. Toda arte segue a seção 7 (inclusive o protocolo 7.1) e todos os personagens seguem a seção 8.
 4. **Leve.** Peso total do site abaixo de 3 MB (limite de 5 MB). A hospedagem é o plano gratuito do Netlify, que cobra créditos por banda.
-5. **Site estático.** Sem backend, sem login, sem coleta de dados pessoais.
+5. **Site estático.** Sem backend, sem login, sem coleta de dados pessoais. Métricas só anônimas, sem cookies (GoatCounter, `src/metricas.js`; decisão do Pedro, 02/11/2026).
 6. **Textos editáveis num lugar só.** Todo texto exibido no jogo e todos os dados do evento ficam em `src/data/`. Português do Brasil, frases curtas (no máximo 2 linhas por caixa de diálogo), tom leve e divertido para crianças.
 
 ## 3. Como trabalhar neste repositório
@@ -336,6 +336,7 @@ Cada etapa termina com PR contra `dev` e o checklist da seção 3.
 - [ ] Logo em boa resolução em `public/assets/logo.png`
 - [x] Música tema enviada pelo Pedro (02/11/2026, própria ou autorizada): `public/assets/audio/tema.m4a`
 - [ ] Revisão dos textos em `src/data/textos.js`
+- [x] Conta no GoatCounter criada (02/11/2026): `phr`, painel em https://phr.goatcounter.com; o jogo usa o prefixo `aladdin/` (falta o Pedro confirmar o e-mail da conta)
 - [ ] (Opcional) Comprar o pacote "8-bit Capibaras" do 14collective (itch.io, US$ 2; a página diz que pode ser usado em projetos comerciais) e subir os arquivos em `references/licenciados/`. Sem ele, a capivara é própria, desenhada no mesmo nível de qualidade.
 
 ## 14. Começar uma sessão nova
@@ -349,6 +350,8 @@ Cada etapa termina com PR contra `dev` e o checklist da seção 3.
   estão no `.gitignore` e nunca devem ser adicionadas.
 
 ## Status
+
+**Publicação das métricas (05/11/2026):** integração da `dev` preparada para a `main` por pedido explícito do Pedro. Corrigido `?metricas=ver` para apenas registrar no console, sem enviar contagens mesmo em produção. Validação: build com Node 22; Chromium passou por Título, Intro, Fase 1 com movimento e Final, sem erros; teste com destino de contagem simulado confirmou o bloqueio em localhost e no modo de inspeção. `dist/`: 2.566.783 bytes. Conferir no celular: abrir o site, iniciar uma partida, abrir Sobre e tocar em ingressos/compartilhar; verificar os eventos no painel. Deploy do Netlify e recebimento no painel não confirmados por este teste local.
 
 | # | Data | PR | Observações |
 |---|---|---|---|
@@ -368,7 +371,8 @@ Cada etapa termina com PR contra `dev` e o checklist da seção 3.
 | Busto da praça | 02/11/2026 | [PR 26](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/26) | Busto do Theodomiro Santiago redesenhado a partir da foto do Pedro: 34×42 (antes 30×30), rosto de 16×20 desenhado pixel a pixel (cabelo ondulado com volume, sobrancelhas, olhos fundos, nariz, boca fechada, queixo; sem o bigode inventado), terno com colete, botões, gravata e lenço, em bronze escurecido cinza-esverdeado como na foto. Pedestal mais largo com placa de bronze "THEODOMIRO / SANTIAGO". `fonte.png` passou para 172×116. |
 | Teatro do G9 | 02/11/2026 | [PR 27](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/27) | Fachada do Teatro do Colégio G9 refeita a partir da foto e do logo enviados pelo Pedro (uso autorizado pelo G9, em `CREDITS.md`): prédio de concreto cinza-claro, janelas e ar-condicionado à esquerda, logo do G9 em pixel (anel preto e "9" laranja), letreiro "CURSO G9" (como na foto), entrada de vidro com "TEATRO" e luzinhas, marquise escura e palmeiras. PNG `teatro-g9.png` (200×170) com a luz do crepúsculo; o tapete pousa na entrada de vidro. |
 | 10 | 02/11/2026 | [PR 28](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/28) | Polimento leve (pedido do Pedro): `og-image.png` e ícones refeitos com o Aladdin novo e a rua de paralelepípedo; robô com tamanho de tela (`TELA=844x390` iPhone, `TELA=915x412` Android) chegou ao Final nos dois, sem erros (médio 134 s, difícil 143 s); revisão dos textos ("Rá!" na risada do Jafar). A fachada do Shopping Vila Nova foi descartada pelo Pedro: a fachada da escola continua a de antes. `dist/` = 2,0 MB. Liberado para o lançamento pelo Pedro. |
-| Música tema | 02/11/2026 | (este PR) | Música do Pedro (própria ou autorizada, em `CREDITS.md`) cortada sem os silêncios das pontas e convertida para AAC mono (`tema.m4a`, 596 KB, 3 min 54 s). Toca em loop, sem reiniciar entre cenas, no Título, Intro, Itajubá, Espaço, Tapete e Final; o chefe mantém a música do Jafar em código, e na volta o tema continua de onde parou. As vinhetas abaixam o tema. Cenas e volume em `SOM` (`config.js`). |
+| Música tema | 02/11/2026 | [PR 29](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/29) e [PR 30](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/30) (produção) | Música do Pedro (própria ou autorizada, em `CREDITS.md`) cortada sem os silêncios das pontas e convertida para AAC mono (`tema.m4a`, 596 KB, 3 min 54 s). Toca em loop, sem reiniciar entre cenas, no Título, Intro, Itajubá, Espaço, Tapete e Final; o chefe mantém a música do Jafar em código, e na volta o tema continua de onde parou. As vinhetas abaixam o tema. Cenas e volume em `SOM` (`config.js`). |
+| Métricas | 02/11/2026 | [PR 31](https://github.com/PedroCDSR/jogo-aladdin-paula-de-marco/pull/31) | GoatCounter anônimo, sem cookies e sem o script deles: `src/metricas.js` chama o endereço de contagem com uma imagem de 1 pixel. Uma visita por abertura (com a origem: WhatsApp, Instagram...) e eventos do funil: `jogar-facil/medio/dificil`, `fase1-itajuba`, `fase2-espaco`, `fase3-chefe`, `final`, `pular-para-final`, `botao-ingressos`, `botao-compartilhar`, `botao-instagram`, `sobre`, `jogar-de-novo`. Só conta em `aladdin-paulademarco.netlify.app` (prévias e robô não entram); ligado na conta `phr` do Pedro (02/11), com tudo do jogo sob o prefixo `aladdin/` (a conta serve para outros projetos). `?metricas=ver` mostra no console o que seria contado. Aviso de privacidade no "Sobre o espetáculo". |
 
 **Próximo passo (02/11/2026):** jogo completo de ponta a ponta e publicado em produção (`main`) a pedido do Pedro:
 https://aladdin-paulademarco.netlify.app. Falta só o que depende dele: logo da escola em boa resolução, OK da Tia

@@ -17,9 +17,11 @@ import { iniciarAvisoGirar } from './ui/AvisoGirar.js';
 import { iniciarPausaFoco } from './ui/PausaFoco.js';
 import { iniciarSom } from './audio/som.js';
 import { carregarDificuldade } from './dificuldade.js';
+import { registrarVisita } from './metricas.js';
 
 // nível escolhido antes (ou ?dificuldade=...), aplicado antes de qualquer cena ler as constantes
 carregarDificuldade();
+registrarVisita();
 
 const container = document.getElementById('jogo');
 

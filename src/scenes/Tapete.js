@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser';
+import { registrar } from '../metricas.js';
 import { LARGURA, ALTURA, TILE, CORES, CORES_CSS, FONTES, TAPETE as CFG } from '../config.js';
 import { TEXTOS } from '../data/textos.js';
 import { Entrada } from '../ui/Entrada.js';
@@ -439,6 +440,7 @@ export class Tapete extends Phaser.Scene {
     this.tweens.add({ targets: caixa, scale: 1, duration: 300, ease: 'Back.out' });
     this.time.delayedCall(CFG.esperaFinalMs, () => {
       this.cameras.main.fadeOut(500, 158, 158, 255);
+      registrar('final');
       this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start('Final', { sapatilhas: this.sapatilhas }));
     });
   }

@@ -9,6 +9,7 @@ import { fundoEntardecer } from '../ui/fundo.js';
 import { novaPartida } from '../estado.js';
 import { tocarMusica } from '../audio/musica.js';
 import { NIVEIS, aplicarDificuldade, dificuldade } from '../dificuldade.js';
+import { registrar } from '../metricas.js';
 
 // Tela de título (CLAUDE.md, seção 11.1): logo, nome do jogo, JOGAR e SOBRE O ESPETÁCULO.
 export class Titulo extends Phaser.Scene {
@@ -126,6 +127,7 @@ export class Titulo extends Phaser.Scene {
     if (!this.scene.isActive() || this.saindo) return;
     this.saindo = true;
     aplicarDificuldade(nivel);
+    registrar(`jogar-${dificuldade()}`);
     novaPartida(this);
     this.cameras.main.fadeOut(250, 158, 158, 255);
     this.cameras.main.once('camerafadeoutcomplete', () => this.scene.start('Intro'));
